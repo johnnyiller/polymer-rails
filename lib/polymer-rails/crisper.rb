@@ -27,7 +27,7 @@ module Polymer
         concat_scripts = @adapter.css_select(@doc, SELECTORS[:javascript]).inject("") do |result, script|
           inner_script = script.inner_html
           inner_script = inner_script.strip
-          last_line = inner_script.lines.last
+          last_line = inner_script.lines.to_a.last
           inner_script << ";" unless last_line =~ /\/\/|;\s*$|\*\/\s*$/
           result << "\n#{inner_script}"
           script.remove
