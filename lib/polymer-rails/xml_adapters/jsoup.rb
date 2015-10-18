@@ -28,6 +28,10 @@ module Polymer
           old_node.replace_with new_node
         end
 
+        def add_child parent, child
+          parent.append_child child
+        end
+
         def css_select doc, selector
           doc.select selector.gsub('\'', '')
         end

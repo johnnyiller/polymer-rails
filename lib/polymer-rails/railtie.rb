@@ -26,10 +26,18 @@ module Polymer
           app.assets.register_postprocessor 'text/html', :web do |context, data|
             Polymer::Rails::Processors::Component.new(context, data).process
           end
+          if Rails.application.config.assets.polymer_rails_use_crisper
+            app.assets.register_bundle_processor  'text/html', :crisper do |context, data|
+              Polymer::Rails::Processors::Crisper.new(context, data).process
+            end
+          end
         else
           app.assets.register_mime_type 'text/html', extensions: ['.html']
           app.assets.register_bundle_processor 'text/html', ::Sprockets::Bundle
           app.assets.register_postprocessor 'text/html', Polymer::Rails::Processors::Component
+          if Rails.application.config.assets.polymer_rails_use_crisper
+            app.assets.register_bundle_processor 'text/html', Polymer::Rails::Processors::Crisper
+          end
         end
       end
     end
