@@ -22,6 +22,10 @@ module Polymer
           node
         end
 
+        def inner_html node
+          node.inner_html
+        end
+
         def replace_node old_node, new_node
           old_node.replace new_node
         end

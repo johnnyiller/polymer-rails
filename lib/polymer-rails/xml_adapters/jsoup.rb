@@ -20,6 +20,10 @@ module Polymer
           node
         end
 
+        def inner_html node
+          node.html
+        end
+
         def stringify doc
           doc.select('body').html
         end
